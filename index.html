@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Site Viability Map</title>
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="app">
+
+  <header id="topbar">
+    <div class="brand">
+      <span class="brand-mark">&#9670;</span>
+      <span class="brand-name">Site Viability Map</span>
+    </div>
+
+    <div class="search-bar">
+      <input id="search-input" type="text" placeholder="Search a postcode, address or place (e.g. HP21 7EN)" autocomplete="off" />
+      <button id="search-btn" class="btn btn--secondary">Search</button>
+    </div>
+
+    <div class="mode-toggle" role="group" aria-label="Site input mode">
+      <button id="mode-pin" class="mode-btn mode-btn--active" title="Drop a pin and use a search radius">Pin + radius</button>
+      <button id="mode-polygon" class="mode-btn" title="Draw the site boundary by hand">Draw boundary</button>
+    </div>
+  </header>
+
+  <div id="body-layout">
+
+    <aside id="sidebar">
+
+      <section id="site-controls" class="panel">
+        <h2>1. Mark your site</h2>
+        <p id="mode-help" class="muted">Click the map to drop a pin, then set a search radius around it.</p>
+
+        <div id="radius-controls">
+          <label for="radius-slider">Search radius: <span id="radius-value">500</span> m</label>
+          <input id="radius-slider" type="range" min="100" max="2000" step="50" value="500" />
+        </div>
+
+        <div id="polygon-controls" class="hidden">
+          <p class="muted">Click points on the map to trace the site boundary, then finish the shape.</p>
+          <div class="btn-row">
+            <button id="polygon-undo" class="btn btn--secondary">Undo point</button>
+            <button id="polygon-finish" class="btn btn--secondary">Finish shape</button>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button id="check-site-btn" class="btn btn--primary" disabled>2. Check this site</button>
+          <button id="clear-btn" class="btn btn--ghost">Clear</button>
+        </div>
+
+        <div id="status-line" class="muted" aria-live="polite"></div>
+      </section>
+
+      <section id="legend-panel-wrapper" class="panel">
+        <h2>Map layers</h2>
+        <p class="muted small">Toggle constraints on/off. Counts appear after you check a site.</p>
+        <div id="legend-panel"></div>
+      </section>
+
+    </aside>
+
+    <main id="map"></main>
+
+    <aside id="snapshot-panel" class="panel">
+      <div id="snapshot-empty" class="muted">
+        <h2>Site Viability Snapshot</h2>
+        <p>Mark a site on the map and click <strong>Check this site</strong> to get a plain-English summary of the planning constraints, opportunities and local policy context.</p>
+        <p class="small">Covers Buckinghamshire, Hertfordshire, Berkshire and Oxfordshire, backed by national open planning data (planning.data.gov.uk) plus a curated summary of each council's current local plan position.</p>
+      </div>
+      <div id="snapshot-content" class="hidden"></div>
+    </aside>
+
+  </div>
+
+  <footer id="footer">
+    <span>Screening tool only — not a substitute for professional planning advice. Data: <a href="https://www.planning.data.gov.uk/" target="_blank" rel="noopener">planning.data.gov.uk</a> (MHCLG, Natural England, Historic England), <a href="https://postcodes.io" target="_blank" rel="noopener">postcodes.io</a>, OpenStreetMap.</span>
+  </footer>
+
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
